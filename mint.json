@@ -56,7 +56,10 @@
         "quickstart",
         "development",
         "development",
-        "quickstart"
+        "quickstart",
+        "snippets/theme-switcher",
+        "snippets/theme-switcher",
+        "snippets/theme-switcher"
       ]
     },
     {
