@@ -59,7 +59,9 @@
         "quickstart",
         "snippets/theme-switcher",
         "snippets/theme-switcher",
-        "snippets/theme-switcher"
+        "snippets/theme-switcher",
+        "quickstart",
+        "snippets/chat-component"
       ]
     },
     {
