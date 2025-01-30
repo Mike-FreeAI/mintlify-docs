@@ -1,0 +1,78 @@
+{/* 
+  LLM Chat Component
+  
+  This component provides a reusable chat interface that can be imported into any documentation page.
+  To use this component, import it like this:
+  
+  import ChatComponent from '/snippets/chat-component.mdx';
+  
+  Then use it in your MDX:
+  <ChatComponent placeholder="Ask a question..." botName="AI Assistant" />
+*/}
+
+<div className="w-full max-w-4xl mx-auto bg-white dark:bg-zinc-900 rounded-lg shadow-md border border-gray-200 dark:border-zinc-700 overflow-hidden">
+  {/* Chat Messages Container */}
+  <div className="flex flex-col space-y-4 p-4 h-[400px] overflow-y-auto" id="chat-messages">
+    {/* Sample Message - User */}
+    <div className="flex items-start justify-end">
+      <div className="bg-primary-100 dark:bg-primary-900 rounded-lg px-4 py-2 max-w-[80%] break-words">
+        <p className="text-sm text-gray-800 dark:text-gray-200">
+          {props.sampleUserMessage || "Hello! Can you help me with the documentation?"}
+        </p>
+      </div>
+      <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 ml-2 flex items-center justify-center">
+        <Icon icon="user" className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+      </div>
+    </div>
+
+    {/* Sample Message - Bot */}
+    <div className="flex items-start">
+      <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 mr-2 flex items-center justify-center">
+        <Icon icon="robot" className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+      </div>
+      <div className="bg-gray-100 dark:bg-zinc-800 rounded-lg px-4 py-2 max-w-[80%] break-words">
+        <p className="text-sm text-gray-800 dark:text-gray-200">
+          {props.sampleBotMessage || "Of course! I'm here to help. What would you like to know?"}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Input Area */}
+  <div className="border-t border-gray-200 dark:border-zinc-700 p-4">
+    <div className="flex items-center space-x-2">
+      <input
+        type="text"
+        className="flex-1 rounded-lg border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-4 py-2 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        placeholder={props.placeholder || "Type your message..."}
+      />
+      <button
+        className="rounded-lg bg-primary-500 px-4 py-2 text-sm font-medium text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        type="button"
+      >
+        <Icon icon="paper-plane" className="w-4 h-4" />
+      </button>
+    </div>
+  </div>
+</div>
+
+{/* 
+  Component Props:
+  - placeholder: string - Custom placeholder text for the input field
+  - sampleUserMessage: string - Custom example user message
+  - sampleBotMessage: string - Custom example bot response
+  - className: string - Additional CSS classes for the container
+  
+  Usage Example:
+  <ChatComponent 
+    placeholder="Ask about our API..."
+    sampleUserMessage="How do I authenticate requests?"
+    sampleBotMessage="To authenticate requests, you'll need to include an API key in the headers..."
+  />
+  
+  Styling:
+  - The component uses Tailwind CSS classes
+  - Colors automatically adapt to light/dark mode
+  - Primary color values are pulled from your theme configuration
+  - Height is fixed at 400px but can be customized via className prop
+*/}
