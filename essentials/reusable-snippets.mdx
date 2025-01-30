@@ -8,103 +8,131 @@ import SnippetIntro from '/snippets/snippet-intro.mdx';
 
 <SnippetIntro />
 
-## Creating a custom snippet
+## Understanding Snippets
 
-**Pre-condition**: You must create your snippet file in the `snippets` directory.
+Snippets are reusable pieces of documentation that help maintain consistency across your content. When you update a snippet, the changes automatically reflect everywhere the snippet is used.
+
+### Directory Requirements
 
 <Note>
-  Any page in the `snippets` directory will be treated as a snippet and will not
-  be rendered into a standalone page. If you want to create a standalone page
-  from the snippet, import the snippet into another file and call it as a
-  component.
+  All snippet files must be created in the `snippets` directory. These files won't be rendered as standalone pages, but can be imported into other documentation pages.
 </Note>
 
-### Default export
+## Types of Snippets
 
-1. Add content to your snippet file that you want to re-use across multiple
-   locations. Optionally, you can add variables that can be filled in via props
-   when you import the snippet.
+### Basic Content Snippets
 
-```mdx snippets/my-snippet.mdx
-Hello world! This is my content I want to reuse across pages. My keyword of the
-day is {word}.
-```
+The simplest form of snippets contains static content that you want to reuse across multiple pages.
+
+<Steps>
+  <Step title="Create the snippet file">
+    Create a new MDX file in your snippets directory with your reusable content:
+
+    ```mdx snippets/welcome-message.mdx
+    Welcome to our documentation! We're excited to help you get started with our platform.
+    ```
+  </Step>
+
+  <Step title="Import and use the snippet">
+    Import the snippet into any documentation page where you want to use it:
+
+    ```mdx
+    import WelcomeMessage from '/snippets/welcome-message.mdx';
+
+    # Getting Started
+    <WelcomeMessage />
+    ```
+  </Step>
+</Steps>
+
+### Dynamic Content Snippets
+
+You can make your snippets more flexible by adding variables that can be passed as props.
+
+<Steps>
+  <Step title="Create a dynamic snippet">
+    Create a snippet file that accepts and uses props:
+
+    ```mdx snippets/greeting.mdx
+    Hello {name}! Welcome to our {product} documentation.
+    ```
+  </Step>
+
+  <Step title="Use the dynamic snippet">
+    Import and use the snippet with custom values:
+
+    ```mdx
+    import Greeting from '/snippets/greeting.mdx';
+
+    <Greeting name="Developer" product="API" />
+    ```
+  </Step>
+</Steps>
+
+### Reusable Variables
+
+Use exported variables to maintain consistent values across your documentation.
+
+<Steps>
+  <Step title="Define your variables">
+    Create a snippet file with exported constants:
+
+    ```mdx snippets/constants.mdx
+    export const version = 'v2.0.0';
+    export const apiEndpoint = 'https://api.example.com';
+    ```
+  </Step>
+
+  <Step title="Use the variables">
+    Import and use the variables in your content:
+
+    ```mdx
+    import { version, apiEndpoint } from '/snippets/constants.mdx';
+
+    The current release is {version}. 
+    All requests should be sent to {apiEndpoint}.
+    ```
+  </Step>
+</Steps>
+
+### Component Snippets
+
+For more complex reusable content, you can create component snippets.
 
 <Warning>
-  The content that you want to reuse must be inside the `snippets` directory in
-  order for the import to work.
+  When creating component snippets, use HTML syntax instead of MDX in the component body, as MDX doesn't compile within arrow functions.
 </Warning>
 
-2. Import the snippet into your destination file.
+<Steps>
+  <Step title="Create a component snippet">
+    Create a reusable component with props:
 
-```mdx destination-file.mdx
----
-title: My title
-description: My Description
----
+    ```mdx snippets/alert-box.mdx
+    export const AlertBox = ({ title, severity }) => (
+      <div className={`alert alert-${severity}`}>
+        <h4>{title}</h4>
+        <slot />
+      </div>
+    );
+    ```
+  </Step>
 
-import MySnippet from '/snippets/path/to/my-snippet.mdx';
+  <Step title="Use the component">
+    Import and use the component with your desired props:
 
-## Header
+    ```mdx
+    import { AlertBox } from '/snippets/alert-box.mdx';
 
-Lorem impsum dolor sit amet.
+    <AlertBox title="Important Update" severity="warning">
+      This feature will be deprecated in the next release.
+    </AlertBox>
+    ```
+  </Step>
+</Steps>
 
-<MySnippet word="bananas" />
-```
+## Best Practices
 
-### Reusable variables
-
-1. Export a variable from your snippet file:
-
-```mdx snippets/path/to/custom-variables.mdx
-export const myName = 'my name';
-
-export const myObject = { fruit: 'strawberries' };
-```
-
-2. Import the snippet from your destination file and use the variable:
-
-```mdx destination-file.mdx
----
-title: My title
-description: My Description
----
-
-import { myName, myObject } from '/snippets/path/to/custom-variables.mdx';
-
-Hello, my name is {myName} and I like {myObject.fruit}.
-```
-
-### Reusable components
-
-1. Inside your snippet file, create a component that takes in props by exporting
-   your component in the form of an arrow function.
-
-```mdx snippets/custom-component.mdx
-export const MyComponent = ({ title }) => (
-  <div>
-    <h1>{title}</h1>
-    <p>... snippet content ...</p>
-  </div>
-);
-```
-
-<Warning>
-  MDX does not compile inside the body of an arrow function. Stick to HTML
-  syntax when you can or use a default export if you need to use MDX.
-</Warning>
-
-2. Import the snippet into your destination file and pass in the props
-
-```mdx destination-file.mdx
----
-title: My title
-description: My Description
----
-
-import { MyComponent } from '/snippets/custom-component.mdx';
-
-Lorem ipsum dolor sit amet.
-
-<MyComponent title={'Custom title'} />
-```
+1. **Keep snippets focused**: Each snippet should serve a single, clear purpose
+2. **Use meaningful names**: Name your snippet files descriptively
+3. **Document props**: If your snippet accepts props, document them in the snippet file
+4. **Version control**: Update all instances when making changes to shared snippets
