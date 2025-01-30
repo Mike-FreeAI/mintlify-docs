@@ -4,17 +4,19 @@ description: 'The navigation field in mint.json defines the pages that go in the
 icon: 'map'
 ---
 
-The navigation menu is the list of links on every website.
+## Overview
 
-You will likely update `mint.json` every time you add a new page. Pages do not show up automatically.
+The navigation menu provides the main structure for your documentation website, appearing as a list of organized links. Every page you want visible needs to be explicitly added to your navigation configuration in `mint.json`.
 
-## Navigation syntax
+## Basic Navigation Structure
 
-Our navigation syntax is recursive which means you can make nested navigation groups. You don't need to include `.mdx` in page names.
+Your navigation structure lives in the `mint.json` file. The basic structure uses groups to organize your content into logical sections.
 
-<CodeGroup>
+### Simple Navigation Groups
 
-```json Regular Navigation
+The most basic navigation setup uses a group with a list of pages:
+
+```json
 "navigation": [
     {
         "group": "Getting Started",
@@ -23,44 +25,82 @@ Our navigation syntax is recursive which means you can make nested navigation gr
 ]
 ```
 
-```json Nested Navigation
+### Nested Navigation Groups
+
+For more complex documentation, you can nest groups within groups:
+
+```json
 "navigation": [
     {
         "group": "Getting Started",
-        "pages": [
-            "quickstart",
-            {
-                "group": "Nested Reference Pages",
-                "pages": ["nested-reference-page"]
-            }
-        ]
+        "pages": ["quickstart"]
     }
 ]
 ```
 
-</CodeGroup>
+<Note>
+You don't need to include the `.mdx` extension when referencing pages in your navigation structure.
+</Note>
 
-## Folders
+## Working with Folders
 
-Simply put your MDX files in folders and update the paths in `mint.json`.
+Organizing content in folders helps maintain a clean documentation structure. Here's how to set up and reference content in folders:
 
-For example, to have a page at `https://yoursite.com/your-folder/your-page` you would make a folder called `your-folder` containing an MDX file called `your-page.mdx`.
+<Steps>
+  <Step title="Create your folder structure">
+    Create a new folder in your documentation root with a descriptive name like `your-folder`.
+  </Step>
+  <Step title="Add your content file">
+    Place your MDX file inside the folder - for example `your-page.mdx`.
+  </Step>
+  <Step title="Update navigation">
+    Reference the file in your navigation using the folder path:
+    ```json
+    "navigation": [
+        {
+            "group": "Group Name",
+            "pages": ["your-folder/your-page"]
+        }
+    ]
+    ```
+  </Step>
+</Steps>
+
+### Folder Naming Restrictions
 
 <Warning>
+The name `api` is reserved for internal use at the root level. If you need an API section, use an alternate name like:
 
-You cannot use `api` for the name of a folder unless you nest it inside another folder. Mintlify uses Next.js which reserves the top-level `api` folder for internal server calls. A folder name such as `api-reference` would be accepted.
+- `api-reference`
+- `api-docs` 
+- `apis`
 
+Or nest your `api` folder inside another folder.
 </Warning>
 
-```json Navigation With Folder
-"navigation": [
-    {
-        "group": "Group Name",
-        "pages": ["your-folder/your-page"]
-    }
-]
-```
+## Advanced Navigation Features
 
-## Hidden Pages
+### Hidden Pages
 
-MDX files not included in `mint.json` will not show up in the sidebar but are accessible through the search bar and by linking directly to them.
+You can create pages that don't appear in the navigation but remain accessible in two ways:
+
+1. Through the search bar
+2. By direct URL access
+
+To create a hidden page:
+
+1. Create your MDX file as normal
+2. Simply omit it from the navigation configuration in `mint.json`
+
+This is useful for:
+- Draft content
+- Supporting documentation
+- Specialized pages that should only be accessed via direct links
+
+### Page Organization Tips
+
+1. Group related content together
+2. Use clear, descriptive group names
+3. Keep your navigation hierarchy shallow (2-3 levels deep)
+4. Place frequently accessed content at higher levels
+5. Consider using hidden pages for supplementary content

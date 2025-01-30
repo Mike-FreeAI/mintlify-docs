@@ -1,318 +1,194 @@
----
-title: 'Global Settings'
-description: 'Mintlify gives you complete control over the look and feel of your documentation using the mint.json file'
-icon: 'gear'
----
+# Global Settings
 
-Every Mintlify site needs a `mint.json` file with the core configuration settings. Learn more about the [properties](#properties) below.
+The `mint.json` file is the central configuration file for your Mintlify documentation site. This guide walks through all available configuration options to help you customize your documentation.
 
-## Properties
+## Core Settings
+
+These fundamental settings define the basic identity and appearance of your documentation.
+
+### Project Information
 
 <ResponseField name="name" type="string" required>
-Name of your project. Used for the global title.
-
-Example: `mintlify`
-
+- Used as the global title for your documentation
+- Appears in browser tabs and search results
+- Example: `mintlify`
 </ResponseField>
 
-<ResponseField name="navigation" type="Navigation[]" required>
-  An array of groups with all the pages within that group
-  <Expandable title="Navigation">
-    <ResponseField name="group" type="string">
-    The name of the group.
-
-    Example: `Settings`
-
-    </ResponseField>
-    <ResponseField name="pages" type="string[]">
-    The relative paths to the markdown files that will serve as pages.
-
-    Example: `["customization", "page"]`
-
-    </ResponseField>
-
-  </Expandable>
-</ResponseField>
+### Visual Identity
 
 <ResponseField name="logo" type="string or object">
-  Path to logo image or object with path to "light" and "dark" mode logo images
-  <Expandable title="Logo">
-    <ResponseField name="light" type="string">
-      Path to the logo in light mode
-    </ResponseField>
-    <ResponseField name="dark" type="string">
-      Path to the logo in dark mode
-    </ResponseField>
-    <ResponseField name="href" type="string" default="/">
-      Where clicking on the logo links you to
-    </ResponseField>
+Configure your documentation's logo display:
+
+- **Simple Usage**: Provide a direct path to your logo image
+- **Advanced Usage**: Configure separate logos for light/dark modes:
+  <Expandable title="Logo Options">
+    <ResponseField name="light" type="string">Path to light mode logo</ResponseField>
+    <ResponseField name="dark" type="string">Path to dark mode logo</ResponseField>
+    <ResponseField name="href" type="string" default="/">Logo click destination</ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="favicon" type="string">
-  Path to the favicon image
+Path to your site's favicon image
 </ResponseField>
 
+### Theme Colors
+
 <ResponseField name="colors" type="Colors">
-  Hex color codes for your global theme
-  <Expandable title="Colors">
+Define your documentation's color scheme:
+
+<Expandable title="Color Configuration">
     <ResponseField name="primary" type="string" required>
-      The primary color. Used for most often for highlighted content, section
-      headers, accents, in light mode
+    - Main brand color
+    - Used for highlights and accents
+    - Applied to headers and interactive elements
     </ResponseField>
     <ResponseField name="light" type="string">
-      The primary color for dark mode. Used for most often for highlighted
-      content, section headers, accents, in dark mode
+    - Alternate color for dark mode
+    - Used for accents in dark mode
     </ResponseField>
     <ResponseField name="dark" type="string">
-      The primary color for important buttons
+    - Color for important buttons
+    - Used for high-contrast elements
     </ResponseField>
     <ResponseField name="background" type="object">
-      The color of the background in both light and dark mode
-      <Expandable title="Object">
-        <ResponseField name="light" type="string" required>
-          The hex color code of the background in light mode
-        </ResponseField>
-        <ResponseField name="dark" type="string" required>
-          The hex color code of the background in dark mode
-        </ResponseField>
+      <Expandable title="Background Colors">
+        <ResponseField name="light" type="string" required>Light mode background</ResponseField>
+        <ResponseField name="dark" type="string" required>Dark mode background</ResponseField>
       </Expandable>
+    </ResponseField>
+</Expandable>
+</ResponseField>
+
+## Navigation Structure
+
+### Main Navigation
+
+<ResponseField name="navigation" type="Navigation[]" required>
+Define your documentation's page structure:
+  <Expandable title="Navigation Structure">
+    <ResponseField name="group" type="string">
+    - Name of the navigation group
+    - Example: `Getting Started`
+    </ResponseField>
+    <ResponseField name="pages" type="string[]">
+    - List of page paths
+    - Example: `["quickstart", "installation", "overview"]`
     </ResponseField>
   </Expandable>
 </ResponseField>
 
+### Top Bar Elements
+
 <ResponseField name="topbarLinks" type="TopbarLink[]">
-  Array of `name`s and `url`s of links you want to include in the topbar
-  <Expandable title="TopbarLink">
-    <ResponseField name="name" type="string">
-    The name of the button.
-
-    Example: `Contact us`
-    </ResponseField>
-    <ResponseField name="url" type="string">
-    The url once you click on the button. Example: `https://mintlify.com/docs`
-    </ResponseField>
-
+Add links to your top navigation bar:
+  <Expandable title="TopbarLink Structure">
+    <ResponseField name="name" type="string">Link text</ResponseField>
+    <ResponseField name="url" type="string">Link destination</ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="topbarCtaButton" type="Call to Action">
-  <Expandable title="Topbar Call to Action">
-    <ResponseField name="type" type={'"link" or "github"'} default="link">
-    Link shows a button. GitHub shows the repo information at the url provided including the number of GitHub stars.
-    </ResponseField>
-    <ResponseField name="url" type="string">
-    If `link`: What the button links to.
-    
-    If `github`: Link to the repository to load GitHub information from.
-    </ResponseField>
-    <ResponseField name="name" type="string">
-    Text inside the button. Only required if `type` is a `link`.
-    </ResponseField>
-
+Configure a prominent call-to-action button:
+  <Expandable title="CTA Options">
+    <ResponseField name="type" type={'"link" or "github"'} default="link">Button type</ResponseField>
+    <ResponseField name="url" type="string">Button destination</ResponseField>
+    <ResponseField name="name" type="string">Button text (for link type)</ResponseField>
   </Expandable>
 </ResponseField>
+
+## Advanced Navigation
+
+### Version Control
 
 <ResponseField name="versions" type="string[]">
-  Array of version names. Only use this if you want to show different versions
-  of docs with a dropdown in the navigation bar.
+Enable documentation versioning:
+- Add version names to create a version selector
+- Only needed for multi-version documentation
 </ResponseField>
+
+### Anchor Navigation
 
 <ResponseField name="anchors" type="Anchor[]">
-  An array of the anchors, includes the `icon`, `color`, and `url`.
-  <Expandable title="Anchor">
-    <ResponseField name="icon" type="string">
-    The [Font Awesome](https://fontawesome.com/search?q=heart) icon used to feature the anchor.
-
-    Example: `comments`
-    </ResponseField>
-    <ResponseField name="name" type="string">
-    The name of the anchor label.
-
-    Example: `Community`
-    </ResponseField>
-    <ResponseField name="url" type="string">
-      The start of the URL that marks what pages go in the anchor. Generally, this is the name of the folder you put your pages in.
-    </ResponseField>
-    <ResponseField name="color" type="string">
-      The hex color of the anchor icon background. Can also be a gradient if you pass an object with the properties `from` and `to` that are each a hex color.
-    </ResponseField>
-    <ResponseField name="version" type="string">
-      Used if you want to hide an anchor until the correct docs version is selected.
-    </ResponseField>
-    <ResponseField name="isDefaultHidden" type="boolean" default="false">
-      Pass `true` if you want to hide the anchor until you directly link someone to docs inside it.
-    </ResponseField>
-    <ResponseField name="iconType" default="duotone" type="string">
-      One of: "brands", "duotone", "light", "sharp-solid", "solid", or "thin"
-    </ResponseField>
-
+Configure sidebar anchor points:
+  <Expandable title="Anchor Configuration">
+    <ResponseField name="icon" type="string">Font Awesome icon name</ResponseField>
+    <ResponseField name="name" type="string">Anchor label text</ResponseField>
+    <ResponseField name="url" type="string">Section identifier</ResponseField>
+    <ResponseField name="color" type="string">Icon background color</ResponseField>
+    <ResponseField name="version" type="string">Version visibility control</ResponseField>
+    <ResponseField name="isDefaultHidden" type="boolean" default="false">Initial visibility state</ResponseField>
+    <ResponseField name="iconType" default="duotone" type="string">Icon style variant</ResponseField>
   </Expandable>
 </ResponseField>
 
-<ResponseField name="topAnchor" type="Object">
-  Override the default configurations for the top-most anchor.
-  <Expandable title="Object">
-    <ResponseField name="name" default="Documentation" type="string">
-      The name of the top-most anchor
-    </ResponseField>
-    <ResponseField name="icon" default="book-open" type="string">
-      Font Awesome icon.
-    </ResponseField>
-    <ResponseField name="iconType" default="duotone" type="string">
-      One of: "brands", "duotone", "light", "sharp-solid", "solid", or "thin"
-    </ResponseField>
-  </Expandable>
-</ResponseField>
+## API Documentation
 
-<ResponseField name="tabs" type="Tabs[]">
-  An array of navigational tabs.
-  <Expandable title="Tabs">
-    <ResponseField name="name" type="string">
-      The name of the tab label.
-    </ResponseField>
-    <ResponseField name="url" type="string">
-      The start of the URL that marks what pages go in the tab. Generally, this
-      is the name of the folder you put your pages in.
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="api" type="API">
-  Configuration for API settings. Learn more about API pages at [API Components](/api-playground/demo).
-  <Expandable title="API">
-    <ResponseField name="baseUrl" type="string">
-      The base url for all API endpoints. If `baseUrl` is an array, it will enable for multiple base url
-      options that the user can toggle.
-    </ResponseField>
-
-    <ResponseField name="auth" type="Auth">
-      <Expandable title="Auth">
-        <ResponseField name="method" type='"bearer" | "basic" | "key"'>
-          The authentication strategy used for all API endpoints.
-        </ResponseField>
-        <ResponseField name="name" type="string">
-        The name of the authentication parameter used in the API playground.
-
-        If method is `basic`, the format should be `[usernameName]:[passwordName]`
-        </ResponseField>
-        <ResponseField name="inputPrefix" type="string">
-        The default value that's designed to be a prefix for the authentication input field.
-
-        E.g. If an `inputPrefix` of `AuthKey` would inherit the default input result of the authentication field as `AuthKey`.
-        </ResponseField>
-      </Expandable>
-    </ResponseField>
-
-    <ResponseField name="playground" type="Playground">
-      Configurations for the API playground
-
-      <Expandable title="Playground">
-        <ResponseField name="mode" default="show" type='"show" | "simple" | "hide"'>
-          Whether the playground is showing, hidden, or only displaying the endpoint with no added user interactivity `simple`
-
-          Learn more at the [playground guides](/api-playground/demo)
-        </ResponseField>
-      </Expandable>
-    </ResponseField>
-
-    <ResponseField name="maintainOrder" type="boolean">
-      Enabling this flag ensures that key ordering in OpenAPI pages matches the key ordering defined in the OpenAPI file.
-
-      <Warning>This behavior will soon be enabled by default, at which point this field will be deprecated.</Warning>
-    </ResponseField>
-
-  </Expandable>
-</ResponseField>
+### OpenAPI Configuration
 
 <ResponseField name="openapi" type="string | string[]">
-  A string or an array of strings of URL(s) or relative path(s) pointing to your
-  OpenAPI file.
-  
-  Examples:
-  <CodeGroup>
-    ```json Absolute
-    "openapi": "https://example.com/openapi.json"
-    ```
-    ```json Relative
-    "openapi": "/openapi.json"
-    ```
-    ```json Multiple
-    "openapi": ["https://example.com/openapi1.json", "/openapi2.json", "/openapi3.json"]
-    ```
-  </CodeGroup>
+Define OpenAPI specification sources:
 
+<CodeGroup>
+```json Single Source
+"openapi": "https://example.com/openapi.json"
+```
+
+```json Multiple Sources
+"openapi": [
+  "https://example.com/openapi1.json",
+  "/openapi2.json"
+]
+```
+</CodeGroup>
 </ResponseField>
+
+### API Settings
+
+<ResponseField name="api" type="API">
+Configure API playground behavior:
+  <Expandable title="API Settings">
+    <ResponseField name="baseUrl" type="string">Base endpoint URL</ResponseField>
+    <ResponseField name="auth" type="Auth">Authentication configuration</ResponseField>
+    <ResponseField name="playground" type="Playground">Interactive playground settings</ResponseField>
+    <ResponseField name="maintainOrder" type="boolean">Parameter order preservation</ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Additional Features
+
+### Social Integration
 
 <ResponseField name="footerSocials" type="FooterSocials">
-  An object of social media accounts where the key:property pair represents the social media platform and the account url.
-  
-  Example: 
-  ```json
-  {
-    "x": "https://x.com/mintlify",
-    "website": "https://mintlify.com"
-  }
-  ```
-  <Expandable title="FooterSocials">
-    <ResponseField name="[key]" type="string">
-    One of the following values `website`, `facebook`, `x`, `discord`, `slack`, `github`, `linkedin`, `instagram`, `hacker-news`
-    
-    Example: `x`
-    </ResponseField>
-    <ResponseField name="property" type="string">
-    The URL to the social platform.
-    
-    Example: `https://x.com/mintlify`
-    </ResponseField>
-  </Expandable>
+Add social media links to your documentation footer:
+```json
+{
+  "x": "https://x.com/mintlify",
+  "github": "https://github.com/mintlify"
+}
+```
 </ResponseField>
+
+### User Feedback
 
 <ResponseField name="feedback" type="Feedback">
-  Configurations to enable feedback buttons
-
-  <Expandable title="Feedback">
-    <ResponseField name="suggestEdit" type="boolean" default="false">
-    Enables a button to allow users to suggest edits via pull requests
-    </ResponseField>
-    <ResponseField name="raiseIssue" type="boolean" default="false">
-    Enables a button to allow users to raise an issue about the documentation
-    </ResponseField>
+Enable user feedback mechanisms:
+  <Expandable title="Feedback Options">
+    <ResponseField name="suggestEdit" type="boolean" default="false">Enable edit suggestions</ResponseField>
+    <ResponseField name="raiseIssue" type="boolean" default="false">Enable issue reporting</ResponseField>
   </Expandable>
 </ResponseField>
 
+### Display Settings
+
 <ResponseField name="modeToggle" type="ModeToggle">
-  Customize the dark mode toggle.
-  <Expandable title="ModeToggle">
-    <ResponseField name="default" type={'"light" or "dark"'}>
-      Set if you always want to show light or dark mode for new users. When not
-      set, we default to the same mode as the user's operating system.
-    </ResponseField>
-    <ResponseField name="isHidden" type="boolean" default="false">
-      Set to true to hide the dark/light mode toggle. You can combine `isHidden` with `default` to force your docs to only use light or dark mode. For example:
-      
-      <CodeGroup>
-      ```json Only Dark Mode
-      "modeToggle": {
-        "default": "dark",
-        "isHidden": true
-      }
-      ```
-
-      ```json Only Light Mode
-      "modeToggle": {
-        "default": "light",
-        "isHidden": true
-      }
-      ```
-      </CodeGroup>
-
-    </ResponseField>
-
+Customize theme switching options:
+  <Expandable title="Mode Toggle Options">
+    <ResponseField name="default" type={'"light" or "dark"'}>Default theme setting</ResponseField>
+    <ResponseField name="isHidden" type="boolean" default="false">Toggle visibility control</ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="backgroundImage" type="string">
-  A background image to be displayed behind every page. See example with
-  [Infisical](https://infisical.com/docs) and [FRPC](https://frpc.io).
+Add a background image to all pages in your documentation
 </ResponseField>
