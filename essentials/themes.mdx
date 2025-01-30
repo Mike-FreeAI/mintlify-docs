@@ -48,6 +48,130 @@ Your documentation's primary colors define its visual identity. Configure these 
 ```
 </CodeGroup>
 
+### Predefined Color Schemes
+
+We provide several predefined color schemes to help you get started quickly:
+
+<CodeGroup>
+```json Modern Blue
+{
+  "colors": {
+    "primary": "#2563EB",
+    "light": "#60A5FA",
+    "dark": "#1E40AF",
+    "background": {
+      "dark": "#0F172A",
+      "light": "#F8FAFC"
+    }
+  }
+}
+```
+
+```json Forest Green
+{
+  "colors": {
+    "primary": "#059669",
+    "light": "#34D399",
+    "dark": "#065F46",
+    "background": {
+      "dark": "#111827",
+      "light": "#ECFDF5"
+    }
+  }
+}
+```
+
+```json Royal Purple
+{
+  "colors": {
+    "primary": "#7C3AED",
+    "light": "#A78BFA",
+    "dark": "#5B21B6",
+    "background": {
+      "dark": "#1E1B4B",
+      "light": "#F5F3FF"
+    }
+  }
+}
+```
+</CodeGroup>
+
+### Seasonal Themes
+
+Customize your documentation for different seasons or events:
+
+<CodeGroup>
+```json Winter Theme
+{
+  "colors": {
+    "primary": "#0EA5E9",
+    "light": "#7DD3FC",
+    "dark": "#0369A1",
+    "background": {
+      "dark": "#082F49",
+      "light": "#F0F9FF"
+    },
+    "anchors": {
+      "from": "#38BDF8",
+      "to": "#818CF8"
+    }
+  }
+}
+```
+
+```json Autumn Theme
+{
+  "colors": {
+    "primary": "#EA580C",
+    "light": "#FB923C",
+    "dark": "#9A3412",
+    "background": {
+      "dark": "#27150B",
+      "light": "#FFF7ED"
+    },
+    "anchors": {
+      "from": "#F97316",
+      "to": "#B45309"
+    }
+  }
+}
+```
+</CodeGroup>
+
+### High-Contrast Accessibility Themes
+
+These themes are optimized for maximum readability and WCAG compliance:
+
+<CodeGroup>
+```json High Contrast Light
+{
+  "colors": {
+    "primary": "#1A1A1A",
+    "light": "#000000",
+    "dark": "#2C2C2C",
+    "background": {
+      "dark": "#FFFFFF",
+      "light": "#FFFFFF"
+    }
+  }
+}
+```
+
+```json High Contrast Dark
+{
+  "colors": {
+    "primary": "#FFFFFF",
+    "light": "#F5F5F5",
+    "dark": "#E5E5E5",
+    "background": {
+      "dark": "#000000",
+      "light": "#000000"
+    }
+  }
+}
+```
+</CodeGroup>
+
 <ResponseField name="colors" type="object">
   <Expandable title="Color Options">
     <ResponseField name="primary" type="string" required>
@@ -67,6 +191,29 @@ Your documentation's primary colors define its visual identity. Configure these 
     </ResponseField>
   </Expandable>
 </ResponseField>
+
+### Creating Custom Color Schemes
+
+Follow these guidelines when creating your own color schemes:
+
+<Steps>
+  <Step title="Choose Base Colors">
+    Select a primary color that represents your brand identity. Use tools like [Coolors](https://coolors.co) or [Adobe Color](https://color.adobe.com) to generate complementary colors.
+  </Step>
+  <Step title="Define Light/Dark Variants">
+    Create lighter and darker variations of your primary color for different modes:
+    - Light variant: Increase brightness and saturation
+    - Dark variant: Decrease brightness while maintaining hue
+  </Step>
+  <Step title="Test Contrast Ratios">
+    Ensure your color combinations meet WCAG accessibility guidelines:
+    - Text/Background contrast ratio should be at least 4.5:1
+    - Large text should have a contrast ratio of at least 3:1
+  </Step>
+  <Step title="Validate Color Harmony">
+    Test your color scheme across different components to ensure visual harmony
+  </Step>
+</Steps>
 
 ## Dark/Light Mode Configuration
 
