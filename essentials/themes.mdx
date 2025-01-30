@@ -1,0 +1,207 @@
+---
+title: 'Custom Themes'
+description: 'Customize the appearance of your documentation with themes'
+icon: 'palette'
+---
+
+## Overview
+
+Mintlify provides powerful theming capabilities that allow you to customize your documentation's appearance to match your brand identity. Themes control everything from colors and typography to component-specific styling.
+
+<Note>
+  All theme customizations are managed through the `mint.json` configuration file at the root of your documentation.
+</Note>
+
+## Color Customization
+
+### Primary Colors
+
+Your documentation's primary colors define its visual identity. Configure these in your `mint.json` file:
+
+<CodeGroup>
+```json Basic Colors
+{
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0A7355"
+  }
+}
+```
+
+```json Advanced Colors
+{
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0A7355",
+    "background": {
+      "dark": "#090014",
+      "light": "#FFFFFF"
+    },
+    "anchors": {
+      "from": "#FF7F57",
+      "to": "#9563FF"
+    }
+  }
+}
+```
+</CodeGroup>
+
+<ResponseField name="colors" type="object">
+  <Expandable title="Color Options">
+    <ResponseField name="primary" type="string" required>
+      The main brand color used for headers, links, and accents
+    </ResponseField>
+    <ResponseField name="light" type="string">
+      Alternative color used in light mode
+    </ResponseField>
+    <ResponseField name="dark" type="string">
+      Alternative color used in dark mode
+    </ResponseField>
+    <ResponseField name="background" type="object">
+      <Expandable title="Background Options">
+        <ResponseField name="dark" type="string">Dark mode background color</ResponseField>
+        <ResponseField name="light" type="string">Light mode background color</ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Dark/Light Mode Configuration
+
+### Mode Toggle
+
+Control how users can switch between dark and light modes:
+
+```json
+{
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": false
+  }
+}
+```
+
+<Warning>
+  Always test your color schemes in both dark and light modes to ensure good contrast and readability.
+</Warning>
+
+### Mode-Specific Assets
+
+You can specify different assets for dark and light modes:
+
+```json
+{
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  }
+}
+```
+
+## Typography Customization
+
+### Font Configuration
+
+Customize your documentation's typography by specifying fonts for different elements:
+
+```json
+{
+  "typography": {
+    "font": "Inter",
+    "headings": "Space Grotesk",
+    "code": "JetBrains Mono"
+  }
+}
+```
+
+<Steps>
+  <Step title="Choose Your Fonts">
+    Select fonts that align with your brand. Mintlify supports:
+    - Google Fonts
+    - Custom fonts (via CSS)
+    - System fonts
+  </Step>
+  <Step title="Configure Font Settings">
+    Add font configurations to your `mint.json`
+  </Step>
+  <Step title="Test Readability">
+    Ensure your chosen fonts are readable at different sizes
+  </Step>
+</Steps>
+
+## Component-Specific Theming
+
+### Custom Component Styles
+
+Customize the appearance of specific components using CSS classes:
+
+<CodeGroup>
+```css Custom Card Styles
+.card {
+  border-radius: 8px;
+  border: 1px solid var(--primary-color);
+}
+```
+
+```css Custom Note Styles
+.note {
+  background-color: var(--background-light);
+  border-left: 4px solid var(--primary-color);
+}
+```
+</CodeGroup>
+
+### Component Theme Inheritance
+
+Components inherit colors from your theme configuration:
+
+<Card title="Theme Inheritance Example" icon="palette">
+  This card automatically uses your primary colors for its accents and hover states.
+</Card>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Maintain Consistency" icon="check">
+    - Use a consistent color palette throughout your documentation
+    - Keep your primary colors aligned with your brand guidelines
+    - Apply colors consistently across similar components
+  </Accordion>
+
+  <Accordion title="Accessibility Considerations" icon="universal-access">
+    - Ensure sufficient color contrast for readability
+    - Test your theme with different color vision deficiencies
+    - Provide clear visual hierarchy through consistent styling
+  </Accordion>
+
+  <Accordion title="Performance Tips" icon="bolt">
+    - Optimize custom fonts for fast loading
+    - Use system fonts for code blocks
+    - Minimize custom CSS overrides
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  Before deploying theme changes, preview your documentation in both dark and light modes to ensure a consistent experience across all pages.
+</Tip>
+
+## Testing Your Theme
+
+Follow these steps to thoroughly test your theme customizations:
+
+<Steps>
+  <Step title="Local Preview">
+    Test your changes locally using `mintlify dev`
+  </Step>
+  <Step title="Cross-Browser Testing">
+    Check your theme in different browsers to ensure consistency
+  </Step>
+  <Step title="Mobile Responsiveness">
+    Verify that your theme works well on different screen sizes
+  </Step>
+  <Step title="Mode Testing">
+    Switch between dark and light modes to verify color schemes
+  </Step>
+</Steps>
